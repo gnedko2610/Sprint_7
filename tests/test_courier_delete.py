@@ -10,12 +10,8 @@ class TestCourierDelete:
 
     @allure.title("Успешное удаление курьера")
     @allure.description("Проверка, что курьера можно удалить по id, возвращается {'ok': true}")
-    def test_delete_courier_success(self):               
-        login = generate_random_string(10)
-        password = generate_random_string(10)
-        create_response = CourierAPI.create_courier(login, password)
-        login_response = CourierAPI.login_courier(login, password)
-        courier_id = login_response.json()["id"]
+    def test_delete_courier_success(self, create_courier_and_get_id):               
+        courier_id = create_courier_and_get_id["id"]
         response = CourierAPI.delete_courier(courier_id)
         assert response.status_code == ResponseCode.OK
         assert response.json() == {"ok": True}

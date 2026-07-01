@@ -15,6 +15,8 @@ class TestCourierLogin:
         password = create_and_delete_courier["password"]        
         response = CourierAPI.login_courier(login, password) 
         assert response.status_code == ResponseCode.OK
+        assert "id" in response.json()
+        assert isinstance(response.json()["id"], int)
 
     @allure.title("Логин курьера без поля login")
     @allure.description("Проверка, что без поля login возвращается ошибка 400")
