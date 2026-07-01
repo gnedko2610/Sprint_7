@@ -1,0 +1,32 @@
+import pytest
+from helpers.helpers import register_new_courier_and_return_login_password
+from api.courier_api import CourierAPI
+from api.order_api import OrderAPI
+from datetime import datetime, timedelta
+
+
+@pytest.fixture
+def create_and_delete_courier():
+    courier_data = register_new_courier_and_return_login_password()
+    login, password, first_name = courier_data
+    response = CourierAPI.login_courier(login, password)
+    courier_id = response.json()["id"]  
+    yield {"login": login, "password": password, "first_name": first_name, "id": courier_id}
+    CourierAPI.delete_courier(courier_id)
+
+@pytest.fixture
+def create_order():
+    delivery_date = (datetime.now() + timedelta(days=2)).strftime("%Y-%m-%d")
+    payload = {
+        "firstName": "Иван",
+        "lastName": "Петров",
+        "address": "ул. Ленина 1",
+        "metroStation": 1,
+        "phone": "+79991234567",
+        "rentTime": 1,
+        "deliveryDate": delivery_date,
+        "comment": "Тестовый заказ"
+    }
+    response = OrderAPI.create_order(payload)
+    track = response.json().get("track")
+    return track

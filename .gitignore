@@ -1,0 +1,8 @@
+__pycache__/
+.pytest_cache/
+api/__pycache__/
+data/__pycache__/
+helpers/__pycache__/
+tests/__pycache__/
+.DS_Store
+allure_results/
