@@ -1,0 +1,1 @@
+{"total":2,"items":[{"uid":"a63e607ab93258137a2083632766a2f9","name":"Тестирование API заказов","statistic":{"failed":1,"broken":0,"skipped":0,"passed":3,"unknown":0,"total":4}},{"uid":"1e6a72ceefd0c6a27c288bc2e47d1ede","name":"Тестирование API курьера","statistic":{"failed":1,"broken":0,"skipped":0,"passed":2,"unknown":0,"total":3}}]}
